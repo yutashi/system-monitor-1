@@ -5,15 +5,19 @@ Highcharts.chart('chart', {
     marginRight: 10,
     events: {
       load: function() {
-        const ws = new ReconnectingWebSocket("ws://" + location.hostname + ":5000/cpu"),
+        const request = window.superagent;
               series = this.series[0];
- 
-        ws.onmessage = function(evt) {
-          let x = (new Date()).getTime(),
-              y = parseFloat(evt.data);
- 
-          series.addPoint([x, y], true, true);
-        }
+
+        setInterval(function () {
+          request
+            .get('/cpu')
+            .end(function(err, res){
+              let x = (new Date()).getTime(),
+                  y = res.body.cpu_percent;
+     
+              series.addPoint([x, y], true, true);
+            });
+        }, 3000);
       } 
     }
   },
