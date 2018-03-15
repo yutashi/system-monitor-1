@@ -25,17 +25,11 @@ Highcharts.chart('chart', {
     text: 'CPU Usage'
   },
   xAxis: {
-    type: 'datetime',
-    tickPixelInterval: 150
+    type: 'datetime'
   },
   yAxis: {
     title: {
-      text: 'Percent' 
-    } 
-  },
-  tooltip: {
-    formatter: function() {
-      return Highcharts.numberFormat(this.y, 2) + '%'; 
+      text: 'Percentage' 
     } 
   },
   series: [{
@@ -44,13 +38,13 @@ Highcharts.chart('chart', {
       let data = [],
           time = (new Date()).getTime(),
           i;
- 
-      for (i=-99; i <=0; i+=1) {
+
+      for (i=-99; i<=0; i+=1) {
         data.push({
-          x: time + 1 * 1000,
+          x: time + i * 1000,
           y: 0
         });
-      };
+      }
       return data;
     }())
   }]
