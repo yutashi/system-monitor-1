@@ -1,5 +1,7 @@
 import ambient
 import time
+import os
+import sys
 
 try:        
     AMBIENT_CHANNEL_ID = int(os.environ['AMBIENT_CHANNEL_ID'])
